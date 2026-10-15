@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_travel/constants/app_colors.dart';
+import 'package:go_travel/mobile/bloc/weather/weather_bloc.dart';
 
 class AppSearchBar extends StatefulWidget {
   const new({super.key});
@@ -16,7 +18,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
   Widget build(BuildContext context) {
     return SearchBar(
       shape: WidgetStateProperty.all(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
       textStyle: WidgetStateProperty.all(
         const TextStyle(color: AppColors.blackColor),
@@ -25,15 +27,19 @@ class _AppSearchBarState extends State<AppSearchBar> {
       textInputAction: TextInputAction.search,
       backgroundColor: WidgetStateProperty.all(AppColors.whiteColor),
       leading: SvgPicture.asset('assets/svg/search.svg'),
-      hintText: 'Search for a coin',
+      hintText: 'Search destination',
       hintStyle: WidgetStateProperty.all(
-        const TextStyle(color: AppColors.blackColor),
+        const TextStyle(color: AppColors.greyColor),
       ),
       controller: _controller,
+      onSubmitted: (value) =>
+          context.read<WeatherBloc>().add(const WeatherEvent.fetchWeather()),
       onChanged: (value) {
-        // context.read<CryptoBloc>().add(
-        //       CryptoEvent.cryptoSearchStringChanged(value),
-        //     );
+        context.read<WeatherBloc>().add(WeatherEvent.searchValueChanged(value));
+
+        value.length > 3
+            ? context.read<WeatherBloc>().add(const WeatherEvent.fetchWeather())
+            : null;
         setState(() {});
       },
       trailing: [
@@ -42,9 +48,9 @@ class _AppSearchBarState extends State<AppSearchBar> {
             icon: const Icon(Icons.clear),
             onPressed: () {
               _controller.clear();
-              // context.read<CryptoBloc>().add(
-              //       const CryptoEvent.cryptoSearchStringChanged(''),
-              //     );
+              context.read<WeatherBloc>().add(
+                const WeatherEvent.searchValueChanged(' '),
+              );
               setState(() {});
             },
           ),

@@ -23,7 +23,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   }
 
   void _int(_Init event, Emitter<WeatherState> emit) {
-    add(const _FetchWeather());
+    // add(const _FetchWeather());
   }
 
   void _fetchWeather(_FetchWeather event, Emitter<WeatherState> emit) async {
@@ -39,7 +39,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
 
     try {
       final result = await locator<WeatherClient>().getCityWeather(
-        state.searchValue.value,
+        state.searchCityString ?? '',
       );
 
       add(_FetchWeatherSuccess(result));
@@ -56,6 +56,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   ) {
     emit(
       state.copyWith(
+        fetchSearchedWeatherStatus: FormzSubmissionStatus.success,
         searchWeatherModel: event.searchWeatherModel,
         errorMessage: null,
       ),
@@ -65,21 +66,20 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   void _fetchWeatherFailed(
     _FetchWeatherFailed event,
     Emitter<WeatherState> emit,
-  ) async {
-    await locator<WeatherClient>().getCityWeather('Lagos');
+  ) {
+    emit(
+      state.copyWith(
+        fetchSearchedWeatherStatus: FormzSubmissionStatus.failure,
+
+        errorMessage: event.errorMessage,
+      ),
+    );
   }
 
   void _searchValueChanged(
     _SearchValueChanged event,
     Emitter<WeatherState> emit,
   ) {
-    final password = SearchValue.dirty(event.value);
-    emit(
-      state.copyWith(
-        searchValue: password.isValid
-            ? password
-            : SearchValue.pure(event.value),
-      ),
-    );
+    emit(state.copyWith(searchCityString: event.value));
   }
 }

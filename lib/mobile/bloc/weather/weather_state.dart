@@ -8,9 +8,35 @@ abstract class WeatherState with _$WeatherState {
     @Default(FormzSubmissionStatus.initial)
     FormzSubmissionStatus fetchSearchedWeatherStatus,
     @Default(SearchValue.pure()) SearchValue searchValue,
+    String? searchCityString,
   }) = _WeatherState;
+
   const new _();
+
+  List<Result> get cryptoAssetSearchResult {
+    final query = searchCityString?.trim().toLowerCase() ?? '';
+
+    if (query.isEmpty) return [];
+
+    return searchWeatherModel?.results
+            ?.where(
+              (city) => city.name?.toLowerCase().startsWith(query) ?? false,
+            )
+            .toList() ??
+        [];
+  }
+
+  List<Result> get computedCities {
+    final query = searchCityString?.trim() ?? '';
+
+    if (query.isEmpty) {
+      return searchWeatherModel?.results?.toList() ?? [];
+    }
+
+    return cryptoAssetSearchResult;
+  }
 }
+
 //==============================================================================
 // New Password
 //==============================================================================
