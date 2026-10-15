@@ -36,24 +36,29 @@ class MobileHome extends StatelessWidget {
             return const Center(child: Text('Failed'));
           }
           if (state.computedCities.isEmpty) {
-            return Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 7,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return const BestPlaces();
-                    },
-                    itemCount: 20,
-                    separatorBuilder: (context, index) {
-                      return AppSpacing.horizontalSpaceMedium;
-                    },
+            return Padding(
+              padding: EdgeInsets.all(AppSpacing.horizontalSpacing),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 7,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return const BestPlaces();
+                      },
+                      itemCount: 20,
+                      separatorBuilder: (context, index) {
+                        return AppSpacing.horizontalSpaceMedium;
+                      },
+                    ),
                   ),
-                ),
-                AppSpacing.verticalSpaceMedium,
-              ],
+                  AppSpacing.verticalSpaceMedium,
+                  const Text('Popular Destinations'),
+                ],
+              ),
             );
           }
           return Padding(
