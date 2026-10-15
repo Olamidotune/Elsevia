@@ -6,7 +6,7 @@ part 'weather_client.g.dart';
 
 @RestApi()
 abstract class WeatherClient {
-  factory WeatherClient(Dio dio, {String? baseUrl}) = _WeatherClient;
+  factory(Dio dio, {String? baseUrl}) = _WeatherClient;
 
   @GET('/v1/search')
   Future<SearchWeatherModel> getCityWeather(
