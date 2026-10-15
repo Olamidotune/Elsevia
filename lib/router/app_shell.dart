@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AppShell extends StatelessWidget {
-  const AppShell({super.key, required this.navigationShell});
+  const new({required this.navigationShell, super.key});
 
   final StatefulNavigationShell navigationShell;
 
