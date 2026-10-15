@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_travel/mobile/bloc/bloc/weather_bloc.dart';
+import 'package:go_travel/mobile/bloc/weather/weather_bloc.dart';
 
 class MobileProfile extends StatelessWidget {
   const new({super.key});
@@ -15,7 +15,7 @@ class MobileProfile extends StatelessWidget {
           body: Center(
             child: TextButton(
               onPressed: () => context.read<WeatherBloc>().add(
-                const WeatherEvent.fetchWeather("Lagos"),
+                const WeatherEvent.fetchWeather(),
               ),
               child: Text('data'),
             ),
