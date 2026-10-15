@@ -34,7 +34,25 @@ class MobileHome extends StatelessWidget {
             return const Center(child: Text('Failed'));
           }
           if (state.computedCities.isEmpty) {
-            return const Center(child: Text('No Data'));
+            return Column(
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height / 7,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return const BestPlaces();
+                    },
+                    itemCount: 20,
+                    separatorBuilder: (context, index) {
+                      return AppSpacing.horizontalSpaceMedium;
+                    },
+                  ),
+                ),
+                AppSpacing.verticalSpaceMedium,
+              ],
+            );
           }
           return Padding(
             padding: EdgeInsetsGeometry.all(AppSpacing.verticalValueMedium),
@@ -51,6 +69,23 @@ class MobileHome extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class BestPlaces extends StatelessWidget {
+  const new({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+      child: Column(
+        children: [
+          CircleAvatar(radius: 40, child: Text('Best')),
+          Text('Best Place'),
+        ],
       ),
     );
   }
