@@ -9,7 +9,8 @@ import 'package:go_travel/services/logger.dart';
 GetIt locator = GetIt.instance;
 
 Future<void> setUpLocator() async {
-  debugPrint('Open Meteo URL: ${EnvKeys.openMeteoBaseUrl}');
+  debugPrint('Open Meteo URL: ${EnvKeys.wikimediaBaseUrl}');
+
   // Dio
   final dio = Dio(
     BaseOptions(

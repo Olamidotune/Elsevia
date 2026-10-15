@@ -30,8 +30,8 @@ class DestinationBloc extends Bloc<DestinationEvent, DestinationState> {
     );
 
     try {
-      final destination = await locator<DestinationClient>().getSummary(
-        'cityName',
+      final destination = await locator<DestinationClient>().searchCity(
+        'Lagos',
       );
 
       add(_FetchDestinationSummarySuccessful(destination));

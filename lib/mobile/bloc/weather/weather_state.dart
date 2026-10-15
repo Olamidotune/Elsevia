@@ -8,13 +8,13 @@ abstract class WeatherState with _$WeatherState {
     @Default(FormzSubmissionStatus.initial)
     FormzSubmissionStatus fetchSearchedWeatherStatus,
     @Default(SearchValue.pure()) SearchValue searchValue,
-    String? searchCityString,
+    String? getCityWeatherString,
   }) = _WeatherState;
 
   const new _();
 
   List<Result> get cryptoAssetSearchResult {
-    final query = searchCityString?.trim().toLowerCase() ?? '';
+    final query = getCityWeatherString?.trim().toLowerCase() ?? '';
 
     if (query.isEmpty) return [];
 
@@ -27,7 +27,7 @@ abstract class WeatherState with _$WeatherState {
   }
 
   List<Result> get computedCities {
-    final query = searchCityString?.trim() ?? '';
+    final query = getCityWeatherString?.trim() ?? '';
 
     if (query.isEmpty) {
       return searchWeatherModel?.results?.toList() ?? [];

@@ -39,7 +39,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
 
     try {
       final result = await locator<WeatherClient>().getCityWeather(
-        state.searchCityString ?? '',
+        state.getCityWeatherString ?? '',
       );
 
       add(_FetchWeatherSuccess(result));
@@ -80,6 +80,6 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     _SearchValueChanged event,
     Emitter<WeatherState> emit,
   ) {
-    emit(state.copyWith(searchCityString: event.value));
+    emit(state.copyWith(getCityWeatherString: event.value));
   }
 }

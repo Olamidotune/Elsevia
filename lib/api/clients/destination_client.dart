@@ -8,9 +8,9 @@ part 'destination_client.g.dart';
 abstract class DestinationClient {
   factory(Dio dio, {String? baseUrl}) = _DestinationClient;
 
-  @GET('/v1/search')
-  Future<DestinationSummary> getSummary(
-    @Query('name') String cityName, {
+  @GET('/v1/search/page')
+  Future<DestinationSummary> searchCity(
+    @Query('q') String cityName, {
     @Query('limit') int count = 10,
   });
 }
