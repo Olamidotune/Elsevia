@@ -1,0 +1,32 @@
+{
+    "configurations": [
+        {
+            "name": "go_travel",
+            "request": "launch",
+            "type": "dart",
+            "toolArgs": [
+                "--dart-define-from-file",
+                "dart-define.json"
+            ]
+        },
+        {
+            "name": "go_travel (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "go_travel (web)",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--web-port",
+                "8080"
+            ],
+            "toolArgs": [
+                "--dart-define-from-file",
+                "dart-define.json"
+            ]
+        }
+    ]
+}

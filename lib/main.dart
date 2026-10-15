@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_travel/mobile/bloc/app_bloc_provider.dart';
 import 'package:go_travel/router/app_router.dart';
+import 'package:go_travel/services/service_locator.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
+
+  await setUpLocator();
 }
 
 class MyApp extends StatelessWidget {

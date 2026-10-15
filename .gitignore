@@ -55,3 +55,6 @@ config.env
 # Generated Files.
 *.g.dart
 *.freezed.dart
+
+
+dart-define.json
