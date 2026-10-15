@@ -11,5 +11,7 @@ class WeatherEvent with _$WeatherEvent {
   const factory fetchWeatherFailed([String? errorMessage]) =
       _FetchWeatherFailed;
 
+  const factory clearSearchCities() = _ClearSearchCities;
+
   const factory errorMessage([String? errorMessage]) = _ErrorMessage;
 }

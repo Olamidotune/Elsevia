@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:formz/formz.dart';
+import 'package:go_travel/constants/app_colors.dart';
 import 'package:go_travel/constants/app_spacing.dart';
 import 'package:go_travel/mobile/bloc/weather/weather_bloc.dart';
 import 'package:go_travel/widgets/app_search_bar.dart';
@@ -60,7 +62,33 @@ class MobileHome extends StatelessWidget {
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 final city = state.computedCities[index];
-                return Center(child: Text(city.name ?? 'N/A'));
+                return Material(
+                  elevation: 5,
+                  child: Container(
+                    padding: EdgeInsets.all(AppSpacing.horizontalSpacingSmall),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.greyColor),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 25,
+                          child: SvgPicture.asset(
+                            'assets/svg/city.svg',
+                            height: 30,
+                          ),
+                        ),
+                        AppSpacing.horizontalSpaceSmall,
+                        Expanded(
+                          child: Text(
+                            "${city.name ?? 'N/A'},${city.admin1 ?? 'N/A'}. ${city.country ?? "N/A"} ",
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
               },
               separatorBuilder: (context, index) {
                 return AppSpacing.verticalSpaceMedium;

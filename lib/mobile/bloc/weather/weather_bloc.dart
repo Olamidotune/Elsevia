@@ -17,6 +17,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     on<_FetchWeatherSuccess>(_fetchWeatherSuccess);
     on<_FetchWeatherFailed>(_fetchWeatherFailed);
     on<_SearchValueChanged>(_searchValueChanged);
+    on<_ClearSearchCities>(_clearSearchCities);
     on<_Init>(_int);
 
     add(_Init());
@@ -81,5 +82,12 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     Emitter<WeatherState> emit,
   ) {
     emit(state.copyWith(getCityWeatherString: event.value));
+  }
+
+  void _clearSearchCities(
+    _ClearSearchCities event,
+    Emitter<WeatherState> emit,
+  ) {
+    emit(state.copyWith(getCityWeatherString: '', searchWeatherModel: null));
   }
 }
