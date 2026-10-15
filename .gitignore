@@ -46,3 +46,15 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+
+config.env
+
+
+
+# Generated Files.
+*.g.dart
+*.freezed.dart
+
+
+dart-define.json

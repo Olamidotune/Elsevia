@@ -1,12 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_travel/mobile/bloc/destination/destination_bloc.dart';
+import 'package:go_travel/mobile/bloc/weather/weather_bloc.dart';
 
 class MobileProfile extends StatelessWidget {
-  const MobileProfile({super.key});
+  const new({super.key});
 
   static const String routeName = '/mobile_profile';
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return BlocBuilder<WeatherBloc, WeatherState>(
+      builder: (context, state) {
+        return Scaffold(
+          body: Center(
+            child: TextButton(
+              onPressed: () => context.read<DestinationBloc>().add(
+                const DestinationEvent.fetchDestinationSummary(),
+              ),
+
+              child: Text('data'),
+            ),
+          ),
+        );
+      },
+    );
   }
 }
+// }
+
+// onPressed: () => context.read<DestinationBloc>().add(
+//             const DestinationEvent.fetchDestinationSummary(),
+//           ),
